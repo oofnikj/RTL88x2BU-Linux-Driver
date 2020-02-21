@@ -9952,6 +9952,7 @@ struct wiphy *rtw_wiphy_alloc(_adapter *padapter, struct device *dev)
 {
 	struct wiphy *wiphy;
 	struct rtw_wiphy_data *wiphy_data;
+	struct net_device *ndev;
 
 	/* wiphy */
 	wiphy = wiphy_new(&rtw_cfg80211_ops, sizeof(struct rtw_wiphy_data));
@@ -9960,6 +9961,7 @@ struct wiphy *rtw_wiphy_alloc(_adapter *padapter, struct device *dev)
 		goto exit;
 	}
 	set_wiphy_dev(wiphy, dev);
+	dev_net_set(ndev, wiphy_net(wiphy));
 
 	/* wiphy_data */
 	wiphy_data = rtw_wiphy_priv(wiphy);
