@@ -9535,6 +9535,11 @@ static void rtw_cfg80211_preinit_wiphy(_adapter *adapter, struct wiphy *wiphy)
 	else
 		wiphy->flags &= ~WIPHY_FLAG_PS_ON_BY_DEFAULT;
 
+/*allow setting network namespace */
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 33))
+	wiphy->flags |= WIPHY_FLAG_NETNS_OK;
+#endif
+
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 2, 0))
 	/* wiphy->flags |= WIPHY_FLAG_SUPPORTS_FW_ROAM; */
 #endif
